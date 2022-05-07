@@ -1,24 +1,24 @@
-# gitui.nvim
+# tig.nvim
 
-[Gitui](https://github.com/extrawurst/gitui) in your Neovim
+[tig](https://github.com/jonas/tig) in your Neovim
 
 ## Prerequisites
 
 - Neovim >= 0.5.0
-- [Gitui](https://github.com/extrawurst/gitui)
+- [tig](https://github.com/jonas/tig)
 
 ## Installation
 
 [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 ```lua
-use 'aspeddro/gitui.nvim'
+use 'ttbug/tig.nvim'
 ```
 
 ## Setup
 
 ```lua
-require("gitui").setup()
+require("tig").setup()
 ```
 
 ## Configuration (optional)
@@ -29,14 +29,14 @@ Following are the default config for the `setup()`. If you want to override, jus
 {
   -- Command Options
   command = {
-    -- Enable :Gitui command
+    -- Enable :Tigui command
     -- @type: bool
     enable = true,
   },
   -- Path to binary
   -- @type: string
   binary = "gitui",
-  -- Argumens to gitui
+  -- Argumens to tig
   -- @type: table of string
   args = {},
   -- WIndow Options
@@ -60,7 +60,7 @@ Following are the default config for the `setup()`. If you want to override, jus
 ## Lua API
 
 ```lua
-require("gitui").open()
+require("tig").open()
 ```
 
 ## TODO
