@@ -14,7 +14,7 @@ M.config = {
   },
   -- Path to binary
   -- @type: string
-  binary = "gitui",
+  binary = "tig",
   -- Argumens to gitui
   -- @type: table of string
   args = {},
@@ -40,7 +40,7 @@ M.setup = function(overrides)
 
   if M.config.command.enable then
     vim.cmd([[
-      command! Gitui :lua require"gitui".open()
+      command! Tigui :lua require"tig".open()
     ]])
   end
 end
