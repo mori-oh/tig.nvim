@@ -35,7 +35,7 @@ Following are the default config for the `setup()`. If you want to override, jus
   },
   -- Path to binary
   -- @type: string
-  binary = "gitui",
+  binary = "tig",
   -- Argumens to tig
   -- @type: table of string
   args = {},
