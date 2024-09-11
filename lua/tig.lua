@@ -1,3 +1,12 @@
+local function pwd()
+  local str = debug.getinfo(2, "S").source:sub(2)
+  return str:match("(.*/)") or './'
+end
+
+local function pwd_parent()
+  return pwd():match("(.+/).*/")
+end
+
 local M = {}
 
 M.state = {
@@ -33,6 +42,22 @@ M.config = {
       border = "rounded",
     },
   },
+  editor = {
+    path = pwd_parent()..'script/callback_script.sh',
+    script = function()
+      local tmpfile = '/tmp/tig_callback'
+      local file = io.open(tmpfile, 'r')
+      if file == nil then
+        vim.api.nvim_redraw()
+      else
+        local content = file:read('a')
+        io.close(file)
+        os.remove(tmpfile)
+        vim.cmd(content)
+      end
+    end,
+  },
+  envs = {},
 }
 
 M.setup = function(overrides)
@@ -74,12 +99,13 @@ M.open = function()
 
   vim.api.nvim_open_win(bufnr, true, window_options)
 
-  vim.fn.termopen(table.concat(vim.tbl_flatten({ M.config.binary, M.config.args }), " "), {
+  vim.fn.termopen( table.concat(vim.tbl_flatten({ 'GIT_EDITOR='..M.config.editor.path, M.config.envs, M.config.binary, M.config.args }), " " ), {
     on_exit = function()
       -- vim.api.nvim_win_close(winr, true)
       -- vim.cmd([[silent! :q]])
       vim.api.nvim_buf_delete(bufnr, { force = true })
       M.state.is_open = false
+      M.config.editor.script()
     end,
   })
   vim.cmd([[startinsert!]])
