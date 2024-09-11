@@ -64,9 +64,7 @@ M.setup = function(overrides)
   M.config = vim.tbl_deep_extend("force", M.config, overrides or {})
 
   if M.config.command.enable then
-    vim.cmd([[
-      command! Tigui :lua require"tig".open()
-    ]])
+    vim.api.nvim_create_user_command('Tigui',require('tig').open,{})
   end
 end
 
@@ -108,7 +106,7 @@ M.open = function()
       M.config.editor.script()
     end,
   })
-  vim.cmd([[startinsert!]])
+  vim.cmd.startinsert()
   M.state.is_open = true
 end
 
