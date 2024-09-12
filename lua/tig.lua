@@ -17,16 +17,19 @@ M.state = {
 M.config = {
   -- Command Options
   command = {
-    -- Enable :Gitui command
+    -- Enable :Tigui command
     -- @type: bool
     enable = true,
   },
   -- Path to binary
   -- @type: string
   binary = "tig",
-  -- Argumens to gitui
+  -- Argumens to tig
   -- @type: table of string
   args = {},
+  -- Environments Variables to tig
+  -- @type: table of string
+  envs = {},
   -- WIndow Options
   window = {
     options = {
@@ -42,8 +45,13 @@ M.config = {
       border = "rounded",
     },
   },
+  -- editor options
   editor = {
+    -- editor path
+    -- @type: string
     path = pwd_parent()..'script/callback_script.sh',
+    -- Script to call editor
+    -- @type function
     script = function()
       local tmpfile = '/tmp/tig_callback'
       local file = io.open(tmpfile, 'r')
@@ -57,7 +65,6 @@ M.config = {
       end
     end,
   },
-  envs = {},
 }
 
 M.setup = function(overrides)
